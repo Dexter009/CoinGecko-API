@@ -37,6 +37,15 @@ describe('CoinGecko', function () {
 
     shared.shouldBeAValidRequest();
   });
+  describe('trending', function() {
+    before(function (done) {
+      this.CoinGeckoClient.trending().then((data) => {
+        this.data = data;
+        done();
+      });
+    });
+    shared.shouldBeAValidRequest();
+  });
 
   describe('coins', function () {
 
@@ -441,7 +450,7 @@ describe('CoinGecko', function () {
 
     describe('fetch', function () {
       before(function (done) {
-        this.CoinGeckoClient.indexes.fetch('BTC').then((data) => {
+        this.CoinGeckoClient.indexes.fetch('AAVE','bibox_futures').then((data) => {
           this.data = data;
           done();
         });
@@ -508,5 +517,26 @@ describe('CoinGecko', function () {
     });
 
   });
+  describe('category', function () {
+    describe('listCategory', function () {
+      before(function (done) {
+        this.CoinGeckoClient.category.listCategory().then((data) => {
+          this.data = data;
+          done();
+        });
+      });
 
+      shared.shouldBeAValidRequest();
+    });
+    describe('fetchCategory', function () {
+      before(function (done) {
+        this.CoinGeckoClient.category.fetchCategory('market_cap_desc').then((data) => {
+          this.data = data;
+          done();
+        });
+      });
+
+      shared.shouldBeAValidRequest();
+    });
+  });
 });
